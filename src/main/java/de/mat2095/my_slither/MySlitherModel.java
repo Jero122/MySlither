@@ -1,8 +1,10 @@
 package de.mat2095.my_slither;
 
+import java.awt.*;
 import java.util.Deque;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Random;
 
 
 class MySlitherModel {
@@ -27,6 +29,7 @@ class MySlitherModel {
 
     private final MySlitherJFrame view;
 
+    Random rand = new Random();
     Snake snake;
 
     MySlitherModel(int gameRadius, int sectorSize, double spangdv, double nsp1, double nsp2, double nsp3, double mamu1, double mamu2, double cst, int mscps, MySlitherJFrame view) {
@@ -209,7 +212,11 @@ class MySlitherModel {
 
     void addFood(int x, int y, double size, boolean fastSpawn) {
         synchronized (view.modelLock) {
-            foods.put(y * gameRadius * 3 + x, new Food(x, y, size, fastSpawn));
+            int red = rand.nextInt(255);
+            int green = rand.nextInt(255);
+            int blue = rand.nextInt(255);
+            Color color = new Color(red,green,blue);
+            foods.put(y * gameRadius * 3 + x, new Food(x, y, size, fastSpawn, color));
         }
     }
 
