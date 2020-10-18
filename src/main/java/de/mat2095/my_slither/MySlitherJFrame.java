@@ -88,7 +88,7 @@ final class MySlitherJFrame extends JFrame {
     // TODO: skins, prey-size, snake-length/width, bot-layer, that-other-thing(?), show ping
 
     private final JTextField server, name;
-    private final JComboBox<String> snake;
+    public final JComboBox<String> snake;
     private final JCheckBox useRandomServer;
     private final JToggleButton connect;
     private final JLabel rank, kills;

@@ -3,9 +3,7 @@ package de.mat2095.my_slither;
 import static de.mat2095.my_slither.MySlitherModel.PI2;
 
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Path2D;
@@ -26,7 +24,7 @@ final class MySlitherCanvas extends JPanel {
     private static final float[] PREY_HALO_FRACTIONS = new float[]{0.5f, 1f};
     private static final Color[] PREY_HALO_COLORS = new Color[]{new Color(0x60FFFF00, true), new Color(0x00FFFF00, true)};
     private static final Color SNAKE_COLOR = new Color(0x287BDE);
-    private static final Color OWN_SNAKE_COLOR = new Color(0x39AFFF);
+    public static  Color OWN_SNAKE_COLOR = new Color(0x39AFFF);
     private static final float[] SNAKE_HALO_FRACTIONS = new float[]{0.5f, 1f};
     private static final Color[] SNAKE_HALO_COLORS = new Color[]{new Color(0x60287BDE, true), new Color(0x00287BDE, true)};
     private static final Color[] OWN_SNAKE_HALO_COLORS = new Color[]{new Color(0x6039AFFF, true), new Color(0x0039AFFF, true)};
@@ -90,6 +88,19 @@ final class MySlitherCanvas extends JPanel {
             @Override
             public void mouseMoved(MouseEvent e) {
                 mouseInput.readWang(e);
+            }
+        });
+
+        addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                super.keyPressed(e);
+                System.out.println("Key pressed code=" + e.getKeyCode() + ", char=" + e.getKeyChar());
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                super.keyReleased(e);
             }
         });
 
@@ -198,7 +209,10 @@ final class MySlitherCanvas extends JPanel {
             model.snakes.values().forEach(snake -> {
                 double thickness = 16 + snake.body.size() / 4.0;
                 if (snake.body.size() >= 2) {
-                    g.setColor(snake == model.snake ? OWN_SNAKE_BODY_COLOR : SNAKE_BODY_COLOR);
+
+                    String test = view.snake.getSelectedItem().toString();
+                    test = test.substring(5);
+                    g.setColor(snake == model.snake ? snake.colours.get(test): SNAKE_BODY_COLOR);
                     g.setStroke(new BasicStroke((float) thickness, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
 
                     double totalLength = 0; // TODO: respect FAM, ???

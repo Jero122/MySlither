@@ -1,6 +1,9 @@
 package de.mat2095.my_slither;
 
+import java.awt.*;
 import java.util.Deque;
+import java.util.Dictionary;
+import java.util.Hashtable;
 
 
 class Snake {
@@ -14,6 +17,7 @@ class Snake {
     private double fam;
     final Deque<SnakeBodyPart> body;
     private final MySlitherModel model;
+    public Hashtable<String, Color> colours = new Hashtable<>();
 
     Snake(int id, String name, double x, double y, double wang, double ang, double sp, double fam, Deque<SnakeBodyPart> body, MySlitherModel model) {
         this.id = id;
@@ -28,6 +32,20 @@ class Snake {
         this.fam = fam;
         this.body = body;
         this.model = model;
+        initColours();
+    }
+    public void initColours()
+    {
+        colours.put("purple", new Color(128, 0, 128));
+        colours.put("blue", new Color(0, 34, 255));
+        colours.put("cyan", new Color(0, 224, 255));
+        colours.put("green", new Color(0, 255, 0));
+        colours.put("pink", new Color(255, 0, 119));
+        colours.put("yellow", new Color(255, 230, 0));
+        colours.put("orange", new Color(255, 102, 0));
+        colours.put("salmon", new Color(250, 128, 114));
+        colours.put("red", new Color(255, 0, 0));
+        colours.put("violet", new Color(127, 0, 255));
     }
 
     private double getSc() {
