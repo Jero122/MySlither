@@ -430,6 +430,10 @@ final class MySlitherJFrame extends JFrame {
         highscoreList.setValueAt(highlighted ? "<html><b>" + name + "</b></html>" : name, row, 1);
     }
 
+    public MySlitherWebSocketClient getClient() {
+        return client;
+    }
+
     private enum Status {
         DISCONNECTED("connect", false, true, true),
         CONNECTING("connecting...", true, true, false),

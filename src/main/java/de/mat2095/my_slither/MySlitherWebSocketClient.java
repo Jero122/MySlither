@@ -33,7 +33,7 @@ final class MySlitherWebSocketClient extends WebSocketClient {
     private MySlitherModel model;
 
     private byte[] initRequest;
-    private long lastAngleTime, lastPingTime;
+    private long lastAngleTime, lastPingTime, ping;
     private byte lastAngleContent, angleToBeSent;
     private boolean lastBoostContent;
     private boolean waitingForPong;
@@ -66,10 +66,17 @@ final class MySlitherWebSocketClient extends WebSocketClient {
         }
 
         if (!waitingForPong && System.currentTimeMillis() - lastPingTime > 250) {
+
+            ping = System.currentTimeMillis() - lastPingTime;
+
             lastPingTime = System.currentTimeMillis();
             waitingForPong = true;
             send(DATA_PING);
         }
+    }
+
+    public double getPing(){
+        return ping;
     }
 
     @Override

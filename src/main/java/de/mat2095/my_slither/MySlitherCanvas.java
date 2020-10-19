@@ -306,7 +306,10 @@ final class MySlitherCanvas extends JPanel {
         if (newFrameTime > lastFrameTime) {
             fps = 0.95 * fps + 0.05 * 1000.0 / (newFrameTime - lastFrameTime);
         }
+        double ping = (view.getClient()).getPing();
+
         g.drawString("FPS: " + Math.round(fps), 0, g.getFontMetrics().getAscent());
+        g.drawString("Ping: " + ping + "ms", 200, g.getFontMetrics().getAscent());
         lastFrameTime = newFrameTime;
     }
 }
